@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { ToDoList } from './ToDoList';
+import { AddToDoForm } from './AddToDoForm';
 
 
 const initialTodos: Array<Todo> = [{text: 'Walk Somewhere', complete: true}, {text: 'Code Something', complete: false}]
@@ -21,10 +22,15 @@ const App: React.FunctionComponent = () => {
     setTodos(newTodos);
   }
 
+  const addTodo: AddTodo = newTodo => {
+    newTodo.trim() !== "" && setTodos([...todos, {text: newTodo, complete: false}]);
+  }
+
   return(
     <div>
       <h1>To Do App</h1>
       <ToDoList todos={todos} toggleTodo={toggleTodo} />
+      <AddToDoForm addTodo={addTodo} />
     </div>
   );
 }
